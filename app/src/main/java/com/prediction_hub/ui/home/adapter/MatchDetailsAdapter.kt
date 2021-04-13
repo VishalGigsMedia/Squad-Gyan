@@ -1,13 +1,15 @@
 package com.prediction_hub.ui.home.adapter
 
 import android.content.Context
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.prediction_hub.common_helper.DefaultHelper.decrypt
 import com.prediction_hub.ui.home.model.MatchDetailsModel
 import com.project.prediction_hub.R
-import com.prediction_hub.common_helper.DefaultHelper.decrypt
 import com.project.prediction_hub.databinding.RowItemMatchDetailsBinding
 import java.util.*
 
@@ -15,6 +17,9 @@ class MatchDetailsAdapter(
     private val context: Context, private val list: ArrayList<MatchDetailsModel.Data.Prediction>?
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     lateinit var mcontext: Context
+    private var layoutManager = LinearLayoutManager(context)
+    private var adapter: DynamicLinksAdapter? = null
+
 
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -48,12 +53,36 @@ class MatchDetailsAdapter(
                 holder.itemMatchDetailsBinding.tvTitle.visibility = View.GONE
             }
 
+            if (list?.get(position)?.rating != null) {
+                if (decrypt(list[position].rating.toString()).isNotEmpty()) {
+                    val rate = decrypt(list[position].rating.toString()).toFloat()
+                    holder.itemMatchDetailsBinding.ratingBar.rating = rate
+                    holder.itemMatchDetailsBinding.ratingBar.visibility = View.VISIBLE
+                } else {
+                    holder.itemMatchDetailsBinding.ratingBar.visibility = View.GONE
+                }
+            }
+
             if (!checkNull(decrypt(list?.get(position)?.description.toString()))) {
-                holder.itemMatchDetailsBinding.tvDescription.text = decrypt(list?.get(position)?.description.toString())
+                holder.itemMatchDetailsBinding.tvDescription.text = Html.fromHtml(decrypt(list?.get(position)?.description.toString()))
                 holder.itemMatchDetailsBinding.tvDescription.visibility = View.VISIBLE
+
             } else {
                 holder.itemMatchDetailsBinding.tvDescription.visibility = View.GONE
             }
+
+            try {
+                if (list?.get(position)?.fantasy_game_links!!.isNotEmpty()) {
+                    holder.itemMatchDetailsBinding.rvLinks.visibility = View.VISIBLE
+                    holder.itemMatchDetailsBinding.rvLinks.layoutManager = layoutManager
+                    adapter = DynamicLinksAdapter(mcontext, list[position].fantasy_game_links)
+                    holder.itemMatchDetailsBinding.rvLinks.adapter = adapter
+                    adapter?.notifyDataSetChanged()
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
 
             if (decrypt(list?.get(position)?.title.toString()) == "Playing Squad") {
                 holder.itemMatchDetailsBinding.tvDescription.visibility = View.GONE
@@ -66,7 +95,7 @@ class MatchDetailsAdapter(
                 }
 
                 if (!checkNull(decrypt(list?.get(position)?.team1_description.toString()))) {
-                    holder.itemMatchDetailsBinding.tvFirstTeamDescription.text = decrypt(list?.get(position)?.team1_description.toString())
+                    holder.itemMatchDetailsBinding.tvFirstTeamDescription.text = Html.fromHtml(decrypt(list?.get(position)?.team1_description.toString()))
                     holder.itemMatchDetailsBinding.tvFirstTeamDescription.visibility = View.VISIBLE
                 } else {
                     holder.itemMatchDetailsBinding.tvFirstTeamDescription.visibility = View.GONE
@@ -80,7 +109,7 @@ class MatchDetailsAdapter(
                 }
 
                 if (!checkNull(decrypt(list?.get(position)?.team2_description.toString()))) {
-                    holder.itemMatchDetailsBinding.tvSecondTeamDescription.text = decrypt(list?.get(position)?.team2_description.toString())
+                    holder.itemMatchDetailsBinding.tvSecondTeamDescription.text = Html.fromHtml(decrypt(list?.get(position)?.team2_description.toString()))
                     holder.itemMatchDetailsBinding.tvSecondTeamDescription.visibility = View.VISIBLE
                 } else {
                     holder.itemMatchDetailsBinding.tvSecondTeamDescription.visibility = View.GONE
