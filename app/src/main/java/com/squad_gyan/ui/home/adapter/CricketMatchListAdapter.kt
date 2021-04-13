@@ -101,7 +101,7 @@ class CricketMatchListAdapter(
                     {
                         if (receivedMillis > curMillis) {
                             customRunnable = CustomRunnable(
-                                handler, holder.itemOffersBinding.tvVs, reformattedStr,context
+                                handler, holder.itemOffersBinding.tvVs, reformattedStr, context
                             )
                             handler.removeCallbacks(customRunnable!!)
                             customRunnable!!.holder = holder.itemOffersBinding.tvVs

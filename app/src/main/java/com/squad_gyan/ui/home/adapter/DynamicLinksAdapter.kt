@@ -1,4 +1,4 @@
-package com.squad_gyan.ui.home.adapter
+package com.prediction_hub.ui.home.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -8,15 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.squad_gyan.R
-import com.squad_gyan.common_helper.DefaultHelper.decrypt
-import com.squad_gyan.databinding.RowItemDynamicLinkBinding
-import com.squad_gyan.ui.home.model.MatchDetailsModel
+import com.prediction_hub.common_helper.DefaultHelper.decrypt
+import com.prediction_hub.ui.home.model.MatchDetailsModel
+import com.project.prediction_hub.R
+import com.project.prediction_hub.databinding.RowItemDynamicLinkBinding
 
 
 class DynamicLinksAdapter(private val context: Context, private val list: List<MatchDetailsModel.Data.Prediction.FantasyGameLink?>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
         val itemDynamicLinkBinding: RowItemDynamicLinkBinding = RowItemDynamicLinkBinding.bind(itemView)
     }
 
@@ -29,7 +30,8 @@ class DynamicLinksAdapter(private val context: Context, private val list: List<M
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        //mcontext = viewGroup.context
+//        mcontext = viewGroup.context
+
         val view = LayoutInflater.from(viewGroup.context).inflate(
             R.layout.row_item_dynamic_link, viewGroup, false
         )
