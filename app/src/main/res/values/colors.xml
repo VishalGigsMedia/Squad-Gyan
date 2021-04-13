@@ -8,7 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="colorPrimary">#0F2C70</color>
+    <color name="colorPrimary">#29d4be</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#A2AEC8</color>
 
@@ -17,5 +17,8 @@
 
     <color name="shimmerColor">#dddddd</color>
     <color name="greenColor">#9E9D24</color>
+
+    <color name="standardLinkColor">#0000EE</color>
+    <color name="lightGrey">#A2AEC8</color>
 
 </resources>
