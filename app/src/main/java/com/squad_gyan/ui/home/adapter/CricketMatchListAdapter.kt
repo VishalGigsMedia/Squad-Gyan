@@ -9,13 +9,13 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.squad_gyan.R
 import com.squad_gyan.common_helper.ConstantHelper
 import com.squad_gyan.common_helper.CustomRunnable
 import com.squad_gyan.common_helper.DefaultHelper.decrypt
+import com.squad_gyan.databinding.RowItemMatchListBinding
 import com.squad_gyan.ui.home.CricketMatchListFragment
 import com.squad_gyan.ui.home.model.MatchListModel
-import com.squad_gyan.R
-import com.squad_gyan.databinding.RowItemMatchListBinding
 import java.text.SimpleDateFormat
 import java.util.*
 

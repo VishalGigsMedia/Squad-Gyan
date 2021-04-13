@@ -3,15 +3,18 @@ package com.prediction_hub.ui.home.adapter
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.text.Html
+import android.text.SpannableString
+import android.text.Spanned
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.prediction_hub.common_helper.DefaultHelper.decrypt
-import com.prediction_hub.ui.home.model.MatchDetailsModel
-import com.project.prediction_hub.R
-import com.project.prediction_hub.databinding.RowItemDynamicLinkBinding
+import com.squad_gyan.R
+import com.squad_gyan.common_helper.DefaultHelper.decrypt
+import com.squad_gyan.databinding.RowItemDynamicLinkBinding
+import com.squad_gyan.ui.home.model.MatchDetailsModel
 
 
 class DynamicLinksAdapter(private val context: Context, private val list: List<MatchDetailsModel.Data.Prediction.FantasyGameLink?>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -43,8 +46,8 @@ class DynamicLinksAdapter(private val context: Context, private val list: List<M
 
             val url = decrypt(list?.get(position)?.link.toString())
             //holder.itemDynamicLinkBinding.tvLinks.text = "https://www.google.com/"
-            holder.itemDynamicLinkBinding.tvTitle.text = Html.fromHtml(decrypt(list?.get(position)?.title.toString()))
-            holder.itemDynamicLinkBinding.tvDescription.text = Html.fromHtml(decrypt(list?.get(position)?.description.toString()))
+            holder.itemDynamicLinkBinding.tvTitle.text = fromHtml(decrypt(list?.get(position)?.title.toString()))//Html.fromHtml()
+            holder.itemDynamicLinkBinding.tvDescription.text = fromHtml(decrypt(list?.get(position)?.description.toString()))//Html.fromHtml()
             holder.itemDynamicLinkBinding.tvLinks.text = decrypt(list?.get(position)?.link.toString())
 
             holder.itemDynamicLinkBinding.tvLinks.setOnClickListener {
@@ -52,6 +55,20 @@ class DynamicLinksAdapter(private val context: Context, private val list: List<M
             }
         }
     }
+
+    fun fromHtml(html: String?): Spanned? {
+        return if (html == null) {
+            // return an empty spannable if the html is null
+            SpannableString("")
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            // FROM_HTML_MODE_LEGACY is the behaviour that was used for versions below android N
+            // we are using this flag to give a consistent behaviour
+            Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY)
+        } else {
+            Html.fromHtml(html)
+        }
+    }
+
 
     private fun setOpenUrl(url: String) {
         try {
