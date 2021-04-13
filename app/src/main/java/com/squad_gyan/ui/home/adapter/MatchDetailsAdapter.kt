@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.prediction_hub.ui.home.adapter.DynamicLinksAdapter
 import com.squad_gyan.R
 import com.squad_gyan.common_helper.DefaultHelper.decrypt
 import com.squad_gyan.databinding.RowItemMatchDetailsBinding
