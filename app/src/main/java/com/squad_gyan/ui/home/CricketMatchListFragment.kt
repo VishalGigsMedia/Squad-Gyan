@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
+import com.squad_gyan.R
 import com.squad_gyan.common_helper.Application
 import com.squad_gyan.common_helper.BundleKey
 import com.squad_gyan.common_helper.ConstantHelper
@@ -27,12 +28,11 @@ import com.squad_gyan.common_helper.DefaultHelper.decrypt
 import com.squad_gyan.common_helper.DefaultHelper.forceLogout
 import com.squad_gyan.common_helper.DefaultHelper.isOnline
 import com.squad_gyan.common_helper.DefaultHelper.showToast
+import com.squad_gyan.databinding.FragmentMatchListBinding
 import com.squad_gyan.retrofit.APIService
 import com.squad_gyan.ui.home.adapter.CricketMatchListAdapter
 import com.squad_gyan.ui.home.model.MatchListModel
 import com.squad_gyan.ui.home.view_model.MatchListViewModel
-import com.squad_gyan.R
-import com.squad_gyan.databinding.FragmentMatchListBinding
 import javax.inject.Inject
 
 class CricketMatchListFragment : Fragment(), CricketMatchListAdapter.MatchListClickListener {
@@ -134,7 +134,8 @@ class CricketMatchListFragment : Fragment(), CricketMatchListAdapter.MatchListCl
 
 
     override fun onMatchClick(id: String, matchType: String) {
-        val matchDetailFragment = MatchDetailFragment()
+        //val matchDetailFragment = MatchDetailFragment()
+        val matchDetailFragment = MatchDetailsParent()
         val bundle = Bundle()
         bundle.putString(BundleKey.MatchId.toString(), id)
         bundle.putString(BundleKey.MatchType.toString(), matchType)

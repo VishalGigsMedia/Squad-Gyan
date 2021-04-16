@@ -31,7 +31,6 @@ import com.squad_gyan.ui.home.HomeFragment
 import com.squad_gyan.ui.home.MatchDetailFragment
 import com.squad_gyan.ui.privacy_policy.PrivacyPolicyFragment
 import com.squad_gyan.ui.terms_condition.TermsConditionFragment
-import com.squad_gyan.R
 import com.squad_gyan.databinding.ActivityMainBinding
 import java.util.*
 import javax.inject.Inject
@@ -123,7 +122,7 @@ class MainActivity : AppCompatActivity(), OnCurrentFragmentVisibleListener {
     private fun showMatchDetails(matchId: String, matchType: String) {
         //println("matchId : $matchId  matchType : $matchType")
         openFragment(this, HomeFragment(), false)
-        val matchDetailFragment = MatchDetailFragment()
+        val matchDetailFragment = MatchDetailFragment(matchId, matchType)
         val bundle = Bundle()
         bundle.putString(BundleKey.MatchId.toString(), matchId)
         bundle.putString(BundleKey.MatchType.toString(), matchType)

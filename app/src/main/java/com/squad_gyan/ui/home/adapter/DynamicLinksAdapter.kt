@@ -1,4 +1,4 @@
-package com.prediction_hub.ui.home.adapter
+package com.squad_gyan.ui.home.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -44,8 +44,9 @@ class DynamicLinksAdapter(private val context: Context, private val list: List<M
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is ItemViewHolder) {
 
+            /*val url = "https://play.google.com/store/apps/details?id=com.predict_squad"
+            holder.itemDynamicLinkBinding.tvLinks.text = url*/
             val url = decrypt(list?.get(position)?.link.toString())
-            //holder.itemDynamicLinkBinding.tvLinks.text = "https://www.google.com/"
             holder.itemDynamicLinkBinding.tvTitle.text = fromHtml(decrypt(list?.get(position)?.title.toString()))//Html.fromHtml()
             holder.itemDynamicLinkBinding.tvDescription.text = fromHtml(decrypt(list?.get(position)?.description.toString()))//Html.fromHtml()
             holder.itemDynamicLinkBinding.tvLinks.text = decrypt(list?.get(position)?.link.toString())

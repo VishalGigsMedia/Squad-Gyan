@@ -23,7 +23,7 @@ import com.squad_gyan.ui.home.model.MatchDetailsModel
 import com.squad_gyan.ui.home.view_model.MatchListViewModel
 import javax.inject.Inject
 
-class MatchDetailFragment : Fragment() {
+class MatchDetailFragment(private val matchId: String, val matchType: String) : Fragment() {
     @Inject
     lateinit var apiService: APIService
 
@@ -56,13 +56,15 @@ class MatchDetailFragment : Fragment() {
         callback?.onSetToolbarTitle(true, MatchDetailFragment::class.java.simpleName)
         setAdapter()
 
-        val bundle = arguments
+        /*val bundle = arguments
         if (bundle != null) {
             val matchId = bundle.getString(BundleKey.MatchId.toString()).toString()
             val matchType = bundle.getString(BundleKey.MatchType.toString()).toString()
 
             getMatchDetails(matchId, matchType)
-        }
+        }*/
+
+        getMatchDetails(matchId, matchType)
     }
 
     fun setOnCurrentFragmentVisibleListener(activity: MainActivity) {

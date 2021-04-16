@@ -18,6 +18,7 @@
     <string name="toolbar_basketball">Basketball</string>
 
     <string name="match_details">Match Details</string>
+    <string name="team_details">Team Details</string>
     <string name="match">Match</string>
     <string name="tournament">Tournament</string>
     <string name="date">Date</string>
@@ -50,5 +51,16 @@
     <string name="match_details_not_available">Match Details Not Available</string>
 
     <string name="match_ongoing">Ongoing</string>
+
+    <string name="prediction">Prediction</string>
+
+    <string name="wicket_keeper">Wicket Keeper</string>
+
+    <string name="batsmen">Batsmen</string>
+
+    <string name="all_round">All Round</string>
+
+    <string name="bowler">Bowler</string>
+
 
 </resources>
