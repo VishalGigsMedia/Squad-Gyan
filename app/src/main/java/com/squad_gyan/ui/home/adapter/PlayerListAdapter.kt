@@ -6,14 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squad_gyan.R
-import com.squad_gyan.common_helper.DefaultHelper
+import com.squad_gyan.common_helper.DefaultHelper.decrypt
 import com.squad_gyan.databinding.RowItemPlayerListBinding
-import com.squad_gyan.ui.home.CricketMatchListFragment
-import com.squad_gyan.ui.home.model.MatchListModel
-import java.util.*
+import com.squad_gyan.ui.home.model.PlayersModel
 
 class PlayerListAdapter(
-    private val context: Context, private val list: ArrayList<MatchListModel.Data.Match>, private val matchListClickListener: CricketMatchListFragment
+    private val context: Context, private val list: ArrayList<PlayersModel>?
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     lateinit var mcontext: Context
@@ -23,7 +21,7 @@ class PlayerListAdapter(
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return list?.size!!
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -43,11 +41,13 @@ class PlayerListAdapter(
         if (holder is ItemViewHolder) {
             try {
 
-                holder.itemPlayerListBinding.tvPlayerName.text = ""
+                val name = decrypt(list!![position].name.toString())
+                println("nameValue: $name")
+                holder.itemPlayerListBinding.tvPlayerName.text = name
 
-                if (DefaultHelper.decrypt(list[position].title).isNotEmpty()) {
+                /*if (DefaultHelper.decrypt(list[position].title).isNotEmpty()) {
                     //holder.itemOffersBinding.tvTitle.text = DefaultHelper.decrypt(list[position].title)
-                }
+                }*/
 
                 /*holder.itemOffersBinding.cvParent.setOnClickListener {
                     matchListClickListener.onMatchClick(list[position].id, ConstantHelper.cricket)
@@ -57,11 +57,6 @@ class PlayerListAdapter(
                 e.printStackTrace()
             }
         }
-    }
-
-    fun addData(list: List<MatchListModel.Data.Match>?) {
-        this.list.addAll(list!!)
-        notifyDataSetChanged()
     }
 
 

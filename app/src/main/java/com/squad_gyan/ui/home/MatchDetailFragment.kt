@@ -8,20 +8,22 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.squad_gyan.MainActivity
 import com.squad_gyan.common_helper.Application
-import com.squad_gyan.common_helper.BundleKey
 import com.squad_gyan.common_helper.ConstantHelper
 import com.squad_gyan.common_helper.DefaultHelper.decrypt
 import com.squad_gyan.common_helper.DefaultHelper.forceLogout
 import com.squad_gyan.common_helper.DefaultHelper.showToast
 import com.squad_gyan.common_helper.OnCurrentFragmentVisibleListener
+import com.squad_gyan.common_helper.PreferenceHelper
 import com.squad_gyan.databinding.FragmentMatchDetailsBinding
 import com.squad_gyan.retrofit.APIService
 import com.squad_gyan.ui.home.adapter.MatchDetailsAdapter
 import com.squad_gyan.ui.home.model.MatchDetailsModel
 import com.squad_gyan.ui.home.view_model.MatchListViewModel
 import javax.inject.Inject
+
 
 class MatchDetailFragment(private val matchId: String, val matchType: String) : Fragment() {
     @Inject
@@ -100,6 +102,8 @@ class MatchDetailFragment(private val matchId: String, val matchType: String) : 
                             this.list = matchDetailsModel.data.prediction as ArrayList<MatchDetailsModel.Data.Prediction>
                             adapter?.addData(list)
                         }
+                        teamDetails(matchDetailsModel.data?.fantasy_teams!!)
+
                     }
                     ConstantHelper.failed -> {
                         setNoDataLayout(decrypt(matchDetailsModel.message.toString()))
@@ -147,6 +151,21 @@ class MatchDetailFragment(private val matchId: String, val matchType: String) : 
                 mBinding?.tvDateValue?.text = date
                 mBinding?.tvTimeValue?.text = time
             }
+
+
         }
+    }
+
+    private fun teamDetails(teamDetails: MatchDetailsModel.Data.FantasyTeams) {
+        val gson = Gson()
+        val jsonTeamFirst = gson.toJson(teamDetails.team1)
+        val jsonTeamSecond = gson.toJson(teamDetails.team2)
+        val preferenceHelper = PreferenceHelper(requireContext())
+        preferenceHelper.setKey("team1", jsonTeamFirst)
+        preferenceHelper.setKey("team2", jsonTeamSecond)
+
+        println("team1Val : " + preferenceHelper.getString("team1"))
+        println("team2Val : " + preferenceHelper.getString("team2"))
+
     }
 }

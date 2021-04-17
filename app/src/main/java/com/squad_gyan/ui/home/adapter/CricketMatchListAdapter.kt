@@ -127,11 +127,13 @@ class CricketMatchListAdapter(
                 }
 
                 holder.itemOffersBinding.cvParent.setOnClickListener {
-                    if (decrypt(list[position].match_details_available) == "1") {
+                    /*if (decrypt(list[position].match_details_available) == "1") {
                         matchListClickListener.onMatchClick(list[position].id, ConstantHelper.cricket)
                     } else {
                         matchListClickListener.onShowErrorDialog()
-                    }
+                    }*/
+                    matchListClickListener.onMatchClick(list[position].id, ConstantHelper.cricket)
+
                 }
 
                 if (decrypt(list[position].team1.logo).isNotEmpty()) {
