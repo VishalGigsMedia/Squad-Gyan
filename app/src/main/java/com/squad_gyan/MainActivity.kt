@@ -318,10 +318,10 @@ class MainActivity : AppCompatActivity(), OnCurrentFragmentVisibleListener {
 
 
     private fun getVersionName(): String {
-        var versionName: String = ""
+        var versionName = ""
         try {
             val pInfo: PackageInfo = packageManager.getPackageInfo(packageName, 0)
-            versionName = pInfo.versionName //Version Name
+            versionName = pInfo.versionName
 
         } catch (e: Exception) {
             e.printStackTrace()
@@ -360,7 +360,7 @@ class MainActivity : AppCompatActivity(), OnCurrentFragmentVisibleListener {
 
         txtUpdateApplication.setOnClickListener {
             val playStoreUrl = "https://play.google.com/store/apps/details?id=$packageName"
-            println("playStoreUrl : $playStoreUrl")
+            //println("playStoreUrl : $playStoreUrl")
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(playStoreUrl))
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
