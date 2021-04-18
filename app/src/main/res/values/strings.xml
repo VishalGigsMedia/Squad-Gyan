@@ -46,7 +46,7 @@
     <string name="update_application">Update Application</string>
     <string name="skip">Skip >>></string>
     <string name="update">Update</string>
-    <string name="update_application_msg">New version of application is available.</string>
+    <string name="update_application_msg">New version of application is available. </string>
 
     <string name="match_details_available">Match Details Available</string>
     <string name="match_details_not_available">Match Details Not Available</string>
