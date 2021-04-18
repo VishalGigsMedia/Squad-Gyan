@@ -132,8 +132,9 @@ class CricketMatchListAdapter(
                     } else {
                         matchListClickListener.onShowErrorDialog()
                     }*/
-                    matchListClickListener.onMatchClick(list[position].id, ConstantHelper.cricket)
-
+                    val toolbarTitle = decrypt(list[position].team1.short_name) + " vs " + decrypt(list[position].team2.short_name)
+                    println("toolbarTitle : $toolbarTitle")
+                    matchListClickListener.onMatchClick(list[position].id, ConstantHelper.cricket, toolbarTitle)
                 }
 
                 if (decrypt(list[position].team1.logo).isNotEmpty()) {
@@ -156,7 +157,7 @@ class CricketMatchListAdapter(
 
 
     interface MatchListClickListener {
-        fun onMatchClick(id: String, matchType: String)
+        fun onMatchClick(id: String, matchType: String, toolbarTitle: String)
         fun onShowErrorDialog()
     }
 

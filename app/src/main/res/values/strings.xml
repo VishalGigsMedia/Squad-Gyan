@@ -43,9 +43,10 @@
     <string name="dismiss">Dismiss</string>
     <string name="err_msg_match_not_available">Match detail will be available soon, you will get notified when match detail is available. </string>
 
-    <string name="update_available">Update Available</string>
+    <string name="update_application">Update Application</string>
     <string name="skip">Skip >>></string>
     <string name="update">Update</string>
+    <string name="update_application_msg">New version of application is available.</string>
 
     <string name="match_details_available">Match Details Available</string>
     <string name="match_details_not_available">Match Details Not Available</string>
@@ -61,6 +62,8 @@
     <string name="all_round">All Round</string>
 
     <string name="bowler">Bowler</string>
+
+    <string name="not_able_to_find_application">Not able to find application</string>
 
 
 </resources>

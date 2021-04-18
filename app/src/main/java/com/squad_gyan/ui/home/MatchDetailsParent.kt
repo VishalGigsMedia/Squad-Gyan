@@ -30,15 +30,17 @@ class MatchDetailsParent : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        callback?.onSetToolbarTitle(true, HomeFragment::class.java.simpleName)
         val bundle = arguments
         if (bundle != null) {
-           val matchId = bundle.getString(BundleKey.MatchId.toString()).toString()
-           val matchType = bundle.getString(BundleKey.MatchType.toString()).toString()
+            val matchId = bundle.getString(BundleKey.MatchId.toString()).toString()
+            val matchType = bundle.getString(BundleKey.MatchType.toString()).toString()
+            val toolbarTitle = bundle.getString(BundleKey.ToolbarTitle.toString()).toString()
 
-            setAdapter(matchId,matchType)
-
+            callback?.onSetToolbarTitle(true, MatchDetailsParent::class.java.simpleName, toolbarTitle)
+            setAdapter(matchId, matchType)
         }
+
+
     }
 
     fun setOnCurrentFragmentVisibleListener(activity: MainActivity) {
@@ -48,7 +50,7 @@ class MatchDetailsParent : Fragment() {
     private fun setAdapter(matchId: String, matchType: String) {
 
         mBinding?.viewPager?.offscreenPageLimit = 1
-        val adapter = ViewPagerAdapter(childFragmentManager, context as FragmentActivity,matchId,matchType)
+        val adapter = ViewPagerAdapter(childFragmentManager, context as FragmentActivity, matchId, matchType)
         mBinding?.viewPager?.adapter = adapter
         mBinding?.tabLayout?.setupWithViewPager(mBinding?.viewPager)
         mBinding?.viewPager?.currentItem = 0
@@ -61,7 +63,7 @@ class MatchDetailsParent : Fragment() {
         override fun getItem(position: Int): Fragment {
             var fragment: Fragment? = null
             when (position) {
-                0 -> fragment = MatchDetailFragment(matchId,matchType)
+                0 -> fragment = MatchDetailFragment(matchId, matchType)
                 1 -> fragment = TeamDetailFragment()
             }
             return fragment!!

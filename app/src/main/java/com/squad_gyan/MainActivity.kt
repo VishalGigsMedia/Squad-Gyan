@@ -25,13 +25,14 @@ import com.squad_gyan.common_helper.DefaultHelper.hideKeyboard
 import com.squad_gyan.common_helper.DefaultHelper.openFragment
 import com.squad_gyan.common_helper.DefaultHelper.showToast
 import com.squad_gyan.common_helper.OnCurrentFragmentVisibleListener
+import com.squad_gyan.databinding.ActivityMainBinding
 import com.squad_gyan.retrofit.APIService
 import com.squad_gyan.ui.about_us.AboutUsFragment
 import com.squad_gyan.ui.home.HomeFragment
 import com.squad_gyan.ui.home.MatchDetailFragment
+import com.squad_gyan.ui.home.MatchDetailsParent
 import com.squad_gyan.ui.privacy_policy.PrivacyPolicyFragment
 import com.squad_gyan.ui.terms_condition.TermsConditionFragment
-import com.squad_gyan.databinding.ActivityMainBinding
 import java.util.*
 import javax.inject.Inject
 import kotlin.concurrent.schedule
@@ -183,16 +184,20 @@ class MainActivity : AppCompatActivity(), OnCurrentFragmentVisibleListener {
         super.onAttachFragment(fragment)
         if (fragment is HomeFragment) fragment.setOnCurrentFragmentVisibleListener(this)
         if (fragment is MatchDetailFragment) fragment.setOnCurrentFragmentVisibleListener(this)
+        if (fragment is MatchDetailsParent) fragment.setOnCurrentFragmentVisibleListener(this)
         if (fragment is AboutUsFragment) fragment.setOnCurrentFragmentVisibleListener(this)
         if (fragment is PrivacyPolicyFragment) fragment.setOnCurrentFragmentVisibleListener(this)
         if (fragment is TermsConditionFragment) fragment.setOnCurrentFragmentVisibleListener(this)
 
     }
 
-    override fun onSetToolbarTitle(show: Boolean, currentFragmentName: String) {
+    override fun onSetToolbarTitle(show: Boolean, currentFragmentName: String, toolbarTitle: String) {
         when (currentFragmentName) {
             HomeFragment::class.java.simpleName -> {
                 setToolbarName(getString(R.string.menu_home))
+            }
+            MatchDetailsParent::class.java.simpleName -> {
+                setToolbarName(toolbarTitle)
             }
             MatchDetailFragment::class.java.simpleName -> {
                 setToolbarName(getString(R.string.match_details))
@@ -214,19 +219,17 @@ class MainActivity : AppCompatActivity(), OnCurrentFragmentVisibleListener {
     }
 
     private fun rateApp() {
-        //val uri = Uri.parse("market://details?id=com.whatsapp")
         val uri = Uri.parse("market://details?id=$packageName")
-        println("playStoreUrl: $uri")
+        //println("playStoreUrl: $uri")
         val myAppLinkToMarket = Intent(Intent.ACTION_VIEW, uri)
         try {
             startActivity(myAppLinkToMarket)
         } catch (e: ActivityNotFoundException) {
-            showToast(this, "Impossible to find an application for the market")
+            showToast(this, getString(R.string.not_able_to_find_application))
         }
     }
 
     private fun shareApplication() {
-        //val link = "https://play.google.com/store/apps/details?id=com.whatsapp"
         val link = Uri.parse("https://play.google.com/store/apps/details?id=$packageName")
         val uri = applicationContext.getString(R.string.kindly_find_the_application) + "\n\n" + link
         val shareIntent = Intent()

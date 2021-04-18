@@ -42,7 +42,6 @@ class PlayerListAdapter(
             try {
 
                 val name = decrypt(list!![position].name.toString())
-                println("nameValue: $name")
                 holder.itemPlayerListBinding.tvPlayerName.text = name
 
                 /*if (DefaultHelper.decrypt(list[position].title).isNotEmpty()) {

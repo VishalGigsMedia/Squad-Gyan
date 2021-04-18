@@ -51,21 +51,11 @@ class MatchDetailFragment(private val matchId: String, val matchType: String) : 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
-
     }
 
     private fun init() {
-        callback?.onSetToolbarTitle(true, MatchDetailFragment::class.java.simpleName)
+       // callback?.onSetToolbarTitle(true, MatchDetailFragment::class.java.simpleName,"")
         setAdapter()
-
-        /*val bundle = arguments
-        if (bundle != null) {
-            val matchId = bundle.getString(BundleKey.MatchId.toString()).toString()
-            val matchType = bundle.getString(BundleKey.MatchType.toString()).toString()
-
-            getMatchDetails(matchId, matchType)
-        }*/
-
         getMatchDetails(matchId, matchType)
     }
 
@@ -163,9 +153,6 @@ class MatchDetailFragment(private val matchId: String, val matchType: String) : 
         val preferenceHelper = PreferenceHelper(requireContext())
         preferenceHelper.setKey("team1", jsonTeamFirst)
         preferenceHelper.setKey("team2", jsonTeamSecond)
-
-        println("team1Val : " + preferenceHelper.getString("team1"))
-        println("team2Val : " + preferenceHelper.getString("team2"))
 
     }
 }

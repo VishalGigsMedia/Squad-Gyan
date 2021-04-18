@@ -11,8 +11,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.squad_gyan.MainActivity
-import com.squad_gyan.common_helper.OnCurrentFragmentVisibleListener
 import com.squad_gyan.R
+import com.squad_gyan.common_helper.OnCurrentFragmentVisibleListener
 import com.squad_gyan.databinding.FragmentHomeBinding
 
 class HomeFragment() : Fragment() {
@@ -30,7 +30,7 @@ class HomeFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        callback?.onSetToolbarTitle(true, HomeFragment::class.java.simpleName)
+        callback?.onSetToolbarTitle(true, HomeFragment::class.java.simpleName, "")
         setAdapter()
     }
 
@@ -39,7 +39,6 @@ class HomeFragment() : Fragment() {
     }
 
     private fun setAdapter() {
-
         mBinding?.viewPager?.offscreenPageLimit = 1
         val adapter = ViewPagerAdapter(childFragmentManager, context as FragmentActivity)
         mBinding?.viewPager?.adapter = adapter
