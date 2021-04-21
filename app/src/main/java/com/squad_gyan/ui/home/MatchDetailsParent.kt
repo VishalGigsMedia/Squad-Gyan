@@ -64,7 +64,7 @@ class MatchDetailsParent : Fragment() {
             var fragment: Fragment? = null
             when (position) {
                 0 -> fragment = MatchDetailFragment(matchId, matchType)
-                1 -> fragment = TeamDetailFragment()
+                1 -> fragment = TeamDetailFragment(matchId, matchType)
             }
             return fragment!!
         }

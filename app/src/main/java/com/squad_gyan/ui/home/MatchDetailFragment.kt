@@ -54,7 +54,7 @@ class MatchDetailFragment(private val matchId: String, val matchType: String) : 
     }
 
     private fun init() {
-       // callback?.onSetToolbarTitle(true, MatchDetailFragment::class.java.simpleName,"")
+        // callback?.onSetToolbarTitle(true, MatchDetailFragment::class.java.simpleName,"")
         setAdapter()
         getMatchDetails(matchId, matchType)
     }
@@ -87,12 +87,14 @@ class MatchDetailFragment(private val matchId: String, val matchType: String) : 
                 when (matchDetailsModel.status) {
                     ConstantHelper.success -> {
                         setMatchDetails(matchDetailsModel.data?.match_details)
+
                         if (matchDetailsModel.data?.prediction?.isNotEmpty() == true) {
                             mBinding?.rvMatchDetails?.visibility = View.VISIBLE
                             this.list = matchDetailsModel.data.prediction as ArrayList<MatchDetailsModel.Data.Prediction>
                             adapter?.addData(list)
                         }
-                        teamDetails(matchDetailsModel.data?.fantasy_teams!!)
+
+                        //teamDetails(matchDetailsModel.data?.fantasy_teams!!)
 
                     }
                     ConstantHelper.failed -> {
@@ -153,6 +155,7 @@ class MatchDetailFragment(private val matchId: String, val matchType: String) : 
         val preferenceHelper = PreferenceHelper(requireContext())
         preferenceHelper.setKey("team1", jsonTeamFirst)
         preferenceHelper.setKey("team2", jsonTeamSecond)
+        println("jsonTeamFirst : $jsonTeamFirst")
 
     }
 }

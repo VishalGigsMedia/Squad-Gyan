@@ -4,7 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.squad_gyan.R
 import com.squad_gyan.common_helper.DefaultHelper.decrypt
 import com.squad_gyan.databinding.RowItemPlayerListBinding
@@ -41,16 +43,40 @@ class PlayerListAdapter(
         if (holder is ItemViewHolder) {
             try {
 
-                val name = decrypt(list!![position].name.toString())
-                holder.itemPlayerListBinding.tvPlayerName.text = name
+                if (decrypt(list!![position].profilePic).isNotEmpty()) {
+                    Glide.with(context).load(decrypt(list[position].profilePic)).centerCrop().into(holder.itemPlayerListBinding.ivPlayer)
+                }
+                if (decrypt(list[position].name).isNotEmpty()) {
+                    holder.itemPlayerListBinding.tvPlayerName.text = decrypt(list[position].name)
+                }
 
-                /*if (DefaultHelper.decrypt(list[position].title).isNotEmpty()) {
-                    //holder.itemOffersBinding.tvTitle.text = DefaultHelper.decrypt(list[position].title)
-                }*/
+                if (decrypt(list[position].teamType).isNotEmpty()) {
+                    if (decrypt(list[position].teamType) == "t1") {
+                        holder.itemPlayerListBinding.tvPlayerName.setTextColor(ContextCompat.getColor(context, R.color.white))
+                        holder.itemPlayerListBinding.tvPlayerName.background = ContextCompat.getDrawable(context, R.drawable.curve_black)
+                    } else {
+                        holder.itemPlayerListBinding.tvPlayerName.setTextColor(ContextCompat.getColor(context, R.color.black))
+                        holder.itemPlayerListBinding.tvPlayerName.background = ContextCompat.getDrawable(context, R.drawable.curve_white)
+                    }
+                }
 
-                /*holder.itemOffersBinding.cvParent.setOnClickListener {
-                    matchListClickListener.onMatchClick(list[position].id, ConstantHelper.cricket)
-                }*/
+                if (decrypt(list[position].isCaptain).isNotEmpty()) {
+                    if (decrypt(list[position].isCaptain) == "1") {
+                        holder.itemPlayerListBinding.tvType.background = ContextCompat.getDrawable(context, R.drawable.captain_background)
+                        holder.itemPlayerListBinding.tvType.visibility = View.VISIBLE
+                        holder.itemPlayerListBinding.tvType.text = context.getString(R.string.captain)
+                        holder.itemPlayerListBinding.tvType.setTextColor(ContextCompat.getColor(context, R.color.white))
+                    }
+                }
+
+                if (decrypt(list[position].isViceCaptain).isNotEmpty()) {
+                    if (decrypt(list[position].isViceCaptain) == "1") {
+                        holder.itemPlayerListBinding.tvType.background = ContextCompat.getDrawable(context, R.drawable.vice_captain_background)
+                        holder.itemPlayerListBinding.tvType.visibility = View.VISIBLE
+                        holder.itemPlayerListBinding.tvType.text = context.getString(R.string.vice_captain)
+                        holder.itemPlayerListBinding.tvType.setTextColor(ContextCompat.getColor(context, R.color.black))
+                    }
+                }
 
             } catch (e: Exception) {
                 e.printStackTrace()

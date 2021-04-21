@@ -1,5 +1,3 @@
 package com.squad_gyan.ui.home.model
 
-class PlayersModel(
-    val id: String? = null, val name: String? = null, val profile_pic: String? = null, val type: String? = null
-)
+data class PlayersModel(val id: String, val name: String, val profilePic: String, val type: String, val isCaptain: String, val isViceCaptain: String, val teamType: String)

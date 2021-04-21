@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.squad_gyan.retrofit.APIService
 import com.squad_gyan.ui.home.model.MatchDetailsModel
 import com.squad_gyan.ui.home.model.MatchListModel
+import com.squad_gyan.ui.home.model.TeamDetailsModel
 import com.squad_gyan.ui.home.repository.MatchListRepository
 
 class MatchListViewModel : ViewModel() {
@@ -13,6 +14,7 @@ class MatchListViewModel : ViewModel() {
     private val matchListRepository: MatchListRepository = MatchListRepository()
     private var matchListModel: LiveData<MatchListModel>? = null
     private var matchDetailsModel: LiveData<MatchDetailsModel>? = null
+    private var teamDetailsModel: LiveData<TeamDetailsModel>? = null
 
 
     fun getCricketMatchList(
@@ -48,6 +50,11 @@ class MatchListViewModel : ViewModel() {
         matchDetailsModel = matchListRepository.getMatchDetails(context, apiService, matchId, matchType)
         return matchDetailsModel
     }
-    
+
+    fun getTeamDetails(context: Context, apiService: APIService, matchId: String, matchType: String): LiveData<TeamDetailsModel>? {
+        teamDetailsModel = matchListRepository.getTeamDetails(context, apiService, matchId, matchType)
+        return teamDetailsModel
+    }
+
 
 }

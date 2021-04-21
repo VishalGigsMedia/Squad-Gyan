@@ -53,17 +53,21 @@
 
     <string name="match_ongoing">Ongoing</string>
 
-    <string name="prediction">Prediction</string>
+    <string name="prediction_first">Prediction First</string>
 
-    <string name="wicket_keeper">Wicket Keeper</string>
+    <string name="prediction_second">Prediction Second</string>
+
+    <string name="wicket_keeper">Wicket-Keepers</string>
 
     <string name="batsmen">Batsmen</string>
 
-    <string name="all_round">All Round</string>
+    <string name="all_round">All-Rounders</string>
 
-    <string name="bowler">Bowler</string>
+    <string name="bowler">Bowlers</string>
 
     <string name="not_able_to_find_application">Not able to find application</string>
 
+    <string name="captain">C</string>
+    <string name="vice_captain">VC</string>
 
 </resources>

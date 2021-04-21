@@ -127,14 +127,13 @@ class CricketMatchListAdapter(
                 }
 
                 holder.itemOffersBinding.cvParent.setOnClickListener {
-                    /*if (decrypt(list[position].match_details_available) == "1") {
-                        matchListClickListener.onMatchClick(list[position].id, ConstantHelper.cricket)
+                    if (decrypt(list[position].match_details_available) == "1") {
+                        val toolbarTitle = decrypt(list[position].team1.short_name) + " vs " + decrypt(list[position].team2.short_name)
+                        matchListClickListener.onMatchClick(list[position].id, ConstantHelper.cricket, toolbarTitle)
                     } else {
                         matchListClickListener.onShowErrorDialog()
-                    }*/
-                    val toolbarTitle = decrypt(list[position].team1.short_name) + " vs " + decrypt(list[position].team2.short_name)
-                    println("toolbarTitle : $toolbarTitle")
-                    matchListClickListener.onMatchClick(list[position].id, ConstantHelper.cricket, toolbarTitle)
+                    }
+
                 }
 
                 if (decrypt(list[position].team1.logo).isNotEmpty()) {
