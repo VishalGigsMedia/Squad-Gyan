@@ -44,7 +44,7 @@
         android:padding="@dimen/_2sdp"
         android:textAllCaps="false"
         android:textColor="@color/black"
-        android:textSize="@dimen/_10ssp"
+        android:textSize="@dimen/_9ssp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

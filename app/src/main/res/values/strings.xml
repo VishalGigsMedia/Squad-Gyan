@@ -53,9 +53,9 @@
 
     <string name="match_ongoing">Ongoing</string>
 
-    <string name="prediction_first">Prediction First</string>
+    <string name="prediction_first">Prediction #1</string>
 
-    <string name="prediction_second">Prediction Second</string>
+    <string name="prediction_second">Prediction #2</string>
 
     <string name="wicket_keeper">Wicket-Keepers</string>
 
